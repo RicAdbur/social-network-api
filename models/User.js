@@ -11,6 +11,7 @@ const userSchema = new Schema({
     type: String,
     unique: true,
     required: true,
+    // Regex to match email address format
     match: [ /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/, "Valid Email address required." ]
   },
   // Array of _id values referencing the Thought model
