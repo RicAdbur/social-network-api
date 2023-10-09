@@ -1,6 +1,5 @@
 const router = require("express").Router();
-const { getUsers, getUserById, createUser, addFriend } = require("../../controllers/userController");
-
+const { getUsers, getUserById, createUser, updateUserById, deleteUserById, addFriend, removeFriend } = require("../../controllers/userController");
 
 router.route("/")
 .get(async (req, res) => {
@@ -18,9 +17,9 @@ router.route("/")
     res.json(createdUser)
   } catch(err) {
     console.log(err);
-    return res.status(500).json(err);
+    return res.status(500).json(err)
   }
-})
+});
 
 router.route("/:userId")
 .get(async (req, res) => {
@@ -29,11 +28,27 @@ router.route("/:userId")
     res.json(user)
   } catch(err) {
     console.log(err);
-    return res.status(500).json(err);
+    return res.status(500).json(err)
   }
 })
-.put()
-.delete()
+.put(async (req, res) => {
+  try {
+    const updatedUser = await updateUserById(req.params.id)
+    res.json(updatedUser)
+  } catch(err) {
+    console.log(err);
+    return res.status(500).json(err)
+  }
+})
+.delete(async (req, res) => {
+  try {
+    const deletedUser = await deleteUserById(req.params.id)
+    res.json(deletedUser)
+  } catch(err) {
+    console.log(err);
+    return res.status(500).json(err)
+  }
+});
 
 router.route("/:userId/friends/:friendId")
 .post(async (req, res) => {
@@ -45,6 +60,14 @@ router.route("/:userId/friends/:friendId")
     return res.status(500).json(err);
   }
 })
-.delete()
+.delete(async (req, res) => {
+  try {
+    const updatedUser = await removeFriend(req.params.userId, req.params.friendId)
+    res.json(updatedUser)
+  } catch(err) {
+    console.log(err);
+    return res.status(500).json(err);
+  }
+});
 
 module.exports = router;

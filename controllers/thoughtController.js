@@ -1,1 +1,1 @@
-const { Users, Thoughts } = require("../models");
+const { Thought } = require("../models");
