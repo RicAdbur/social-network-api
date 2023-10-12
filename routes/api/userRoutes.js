@@ -33,7 +33,7 @@ router.route("/:userId")
 })
 .put(async (req, res) => {
   try {
-    const updatedUser = await updateUserById(req.params.id)
+    const updatedUser = await updateUserById(req.params.userId, req.body)
     res.json(updatedUser)
   } catch(err) {
     console.log(err);
@@ -42,14 +42,14 @@ router.route("/:userId")
 })
 .delete(async (req, res) => {
   try {
-    const deletedUser = await deleteUserById(req.params.id)
+    const deletedUser = await deleteUserById(req.params.userId)
     res.json(deletedUser)
   } catch(err) {
     console.log(err);
     return res.status(500).json(err)
   }
 });
-
+  
 router.route("/:userId/friends/:friendId")
 .post(async (req, res) => {
   try {

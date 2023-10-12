@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { User, Thought } = require("../models");
 
 const getUsers = () => {
   return User.find()
@@ -12,11 +12,16 @@ const createUser = (userData) => {
   return User.create(userData)
 };
 
-const updateUserById = (id) => {
-  return User.findByIdAndUpdate({ _id: id }, { new: true })
+const updateUserById = (id, userData) => {
+  return User.findByIdAndUpdate({ _id: id }, userData, { new: true })
 };
 
-const deleteUserById = (id) => {
+const deleteUserById = async (id) => {
+  // delete thoughts associated with user
+  const user = await getUserById(id)
+  const thoughtIds = user.thoughts
+  await Thought.deleteMany({ _id: { $in: thoughtIds }})
+  // delete user
   return User.findByIdAndDelete({ _id: id })
 };
 

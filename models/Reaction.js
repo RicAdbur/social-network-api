@@ -17,9 +17,8 @@ const reactionSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now,
-    // TODO: Use getter method to format timestamp on query
-    get() {
-      return new Date(this.createdAt).toLocaleString()
+    get(currentDate) {
+      return currentDate.toLocaleString()
     }
   },
 });
