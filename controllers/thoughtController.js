@@ -24,7 +24,7 @@ const addReaction = (thoughtId, reactionData) => {
   return Thought.findByIdAndUpdate({ _id: thoughtId }, { $push: { reactions: reactionData }}, { new: true })
 };
 
-const deleteReaction = async (thoughtId, reactionId) => {
+const deleteReaction = (thoughtId, reactionId) => {
   return Thought.findByIdAndUpdate({ _id: thoughtId }, { $pull: { reactions: { reactionId  } }}, { new: true })
 };
 
