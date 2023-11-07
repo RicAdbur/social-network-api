@@ -2,8 +2,8 @@ const { Schema } = require("mongoose");
 
 const reactionSchema = new Schema({
   reactionId: {
-    type: Schema.ObjectId,
-    default: () => new Schema.ObjectId()
+    type: Schema.Types.ObjectId,
+    auto: true
   },
   reactionBody: {
     type: String,
