@@ -12,7 +12,7 @@ router.route("/")
   }
 });
 
-router.route("/:id")
+router.route("/:thoughtId")
 .get(async (req, res) => {
   try {
     const thought = await getThoughtById(req.params.thoughtId)
@@ -41,7 +41,7 @@ router.route("/:id")
   }
 });
 
-router.route("/:userId")
+router.route("/")
 .post(async (req, res) => {
   try {
     const newThought = await createThought(req.body)
@@ -63,7 +63,7 @@ router.route("/:thoughtId/reactions")
   }
 });
 
-router.route("/:thoughtId/reaction/:reactionId")
+router.route("/:thoughtId/reactions/:reactionId")
 .delete(async (req, res) => {
   try {
     const removedReaction = await deleteReaction(req.params.thoughtId, req.params.reactionId)
